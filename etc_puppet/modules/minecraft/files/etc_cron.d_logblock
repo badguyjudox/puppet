@@ -1,0 +1,3 @@
+# Dump the logblock database every morning.  We'll keep it around for 7 days.
+0 6 * * * root /usr/bin/mysqldump logblock > /dumps/logblock-`date`.sql
+15 6 * * * root /usr/bin/cleanup-dumps

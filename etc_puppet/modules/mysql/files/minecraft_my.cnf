@@ -1,0 +1,40 @@
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Default to using old password format for compatibility with mysql 3.x
+# clients (those using the mysqlclient10 compatibility package).
+old_passwords=0
+
+# Disabling symbolic-links is recommended to prevent assorted security risks;
+# to do so, uncomment this line:
+# symbolic-links=0
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+#Should be obviously
+port=25935
+
+#Choose MYISAM or INNODB, MYISAM is recommended when logging chat due to fulltext indices.
+default-storage-engine=MYISAM
+
+#Increase this, if you are getting "Too many connection errors"
+max_connections=500
+
+#Waste of memory, LogBlock updates all tables very frequently, so caching query results may cause a slowdown instead of a performance improvement
+query_cache_size=0
+
+#Buffer, how much RAM MySQL should consume. First is MyISAM index buffer, second InnoDB index and row buffer. Increase with growing database size, the indicies should be kept in RAM, otherwise inserts and selects can take a while due to reading from hard drive.
+key_buffer_size=128M
+innodb_buffer_pool_size=256M
+
+#Must be disable to allow LB to connect to the database.
+#skip-networking
+
+#Remote access
+bind-address 127.0.0.1        # only localhost
+
+#This will reduce the DNS lookups, and so speed some things up. Note you can't use domains in bind-address then.
+skip-name-resolve

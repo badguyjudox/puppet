@@ -1,0 +1,2 @@
+# Tar up the live minecraft directory every night.  We'll keep it around for three days
+30 5 * * * root /bin/tar -czf /dumps/minecraft-live`date`.tar.gz /home/minecraft/live

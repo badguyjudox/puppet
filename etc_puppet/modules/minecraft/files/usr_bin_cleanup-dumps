@@ -1,0 +1,4 @@
+#!/bin/bash
+
+find /data/ -name \*.sql -mtime +7 -print0 | xargs -0 rm -f
+find /data/ -name \*.tar.gz -mtime +3 -print0 | xargs -0 rm -f
